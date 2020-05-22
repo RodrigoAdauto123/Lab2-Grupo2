@@ -11,9 +11,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clase5.entitades.Empleado;
+import com.example.lab2_grupo2.entitades.Empleado;
 
 public class ListaEmpleadosAdapter extends RecyclerView.Adapter<ListaEmpleadosAdapter.EmpleadoViewHolder> {
-Empleado [] listaEmpleados;
+Empleado[] listaEmpleados;
 Context contexto;
 public ListaEmpleadosAdapter(Empleado[] lista, Context c){
     this.listaEmpleados=lista;
