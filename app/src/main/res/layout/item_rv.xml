@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="50dp"
+    android:paddingTop="50dp"
+    android:paddingEnd="50dp"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="82dp">
+
+    <Button
+        android:id="@+id/editarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="50dp"
+        android:text="Editar" />
+
+    <Button
+        android:id="@+id/borrarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="50dp"
+        android:text="Borrar" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:paddingStart="8dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="188dp"
+        tools:layout_editor_absoluteY="72dp" />
+
+</androidx.cardview.widget.CardView>
