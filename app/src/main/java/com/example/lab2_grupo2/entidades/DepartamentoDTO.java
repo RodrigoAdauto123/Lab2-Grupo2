@@ -1,6 +1,8 @@
 package com.example.lab2_grupo2.entidades;
 
-public class DepartamentoDTO {
+import java.io.Serializable;
+
+public class DepartamentoDTO implements Serializable {
     private String estado;
     private int cuota;
     private Departamento[] lista;
