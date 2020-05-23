@@ -1,8 +1,10 @@
 package com.example.lab2_grupo2.entitades;
 
-public class DtoTrabajo {
+import java.io.Serializable;
+
+public class DtoTrabajo implements Serializable {
     private String estado;
-    private Trabajo[] trabajos;
+    private TrabajoListar[] trabajoListars;
 private int cuota;
 
 
@@ -14,12 +16,12 @@ private int cuota;
         this.estado = estado;
     }
 
-    public Trabajo[] getTrabajos() {
-        return trabajos;
+    public TrabajoListar[] getTrabajoListars() {
+        return trabajoListars;
     }
 
-    public void setTrabajos(Trabajo[] trabajos) {
-        this.trabajos = trabajos;
+    public void setTrabajoListars(TrabajoListar[] trabajoListars) {
+        this.trabajoListars = trabajoListars;
     }
 
     public int getCuota() {

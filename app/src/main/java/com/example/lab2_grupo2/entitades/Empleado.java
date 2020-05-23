@@ -1,6 +1,8 @@
 package com.example.lab2_grupo2.entitades;
 
-public class Empleado {
+import java.io.Serializable;
+
+public class Empleado implements Serializable {
 
     private int employee_id;
     private String first_name;

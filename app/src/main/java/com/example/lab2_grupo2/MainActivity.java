@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.example.lab2_grupo2.entitades.DtoTrabajo;
-import com.example.lab2_grupo2.entitades.Trabajo;
+import com.example.lab2_grupo2.entitades.TrabajoListar;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Gson gson=new Gson();
                         DtoTrabajo dtoTrabajo= gson.fromJson(response, DtoTrabajo.class);
-                        Trabajo[] lista=dtoTrabajo.getTrabajos();
+                        TrabajoListar[] lista=dtoTrabajo.getTrabajoListars();
                         ListaTrabajosAdapter listaTrabajosAdapter =new ListaTrabajosAdapter(lista, MainActivity.this);
                         RecyclerView recyclerView = findViewById(R.id.recyclerView);
                         recyclerView.setAdapter(listaTrabajosAdapter);

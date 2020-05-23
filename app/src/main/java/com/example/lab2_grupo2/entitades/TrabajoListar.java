@@ -1,6 +1,8 @@
 package com.example.lab2_grupo2.entitades;
 
-public class Trabajo {
+import java.io.Serializable;
+
+public class TrabajoListar implements Serializable {
 
 
 

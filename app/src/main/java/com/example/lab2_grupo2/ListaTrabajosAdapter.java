@@ -11,14 +11,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.lab2_grupo2.entitades.Empleado;
-import com.example.lab2_grupo2.entitades.Trabajo;
+import com.example.lab2_grupo2.entitades.TrabajoListar;
 
 public class ListaTrabajosAdapter extends RecyclerView.Adapter<ListaTrabajosAdapter.TrabajoViewHolder> {
-Trabajo[] listaTrabajos;
+TrabajoListar[] listaTrabajoListars;
 Context contexto;
-public ListaTrabajosAdapter(Trabajo[] lista, Context c){
-    this.listaTrabajos =lista;
+public ListaTrabajosAdapter(TrabajoListar[] lista, Context c){
+    this.listaTrabajoListars =lista;
     this.contexto=c;
 }
 public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
@@ -46,7 +45,7 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public void onBindViewHolder(TrabajoViewHolder holder, int position) {
-    Trabajo t = listaTrabajos[position];
+    TrabajoListar t = listaTrabajoListars[position];
     String text=t.getJobTitle();
     holder.textView10.setText(text);
 
@@ -55,6 +54,6 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public int getItemCount() {
-        return listaTrabajos.length;
+        return listaTrabajoListars.length;
     }
 }
