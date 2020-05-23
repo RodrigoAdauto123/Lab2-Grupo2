@@ -7,10 +7,11 @@
     tools:context=".Main2Activity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/ObtenerAPIKEYButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="271dp"
+        android:onClick="obtenerDeInternetApiKEy"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +27,7 @@
         android:inputType="textPersonName"
 
         android:text="v4NYj9Ft4AHs95S9Qbvu"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/ObtenerAPIKEYButton"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
