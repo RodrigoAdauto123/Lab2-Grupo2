@@ -26,8 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.clase5.entitades.DtoEmpleado;
-import com.example.clase5.entitades.Empleado;
+
+import com.example.lab2_grupo2.entitades.DtoEmpleado;
+import com.example.lab2_grupo2.entitades.Empleado;
 import com.google.gson.Gson;
 
 import java.io.FileOutputStream;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    /**@Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.deleteBar:
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.show();
 
 
-    }
+    }*/
     public boolean isInternetAvailable() {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void obtenerDeInternet(View view){
 
-        String url="https://3dkvh9wb90.execute-api.us-east-1.amazonaws.com/prod/";
+        String url="http://ec2-54-165-73-192.compute-1.amazonaws.com:9000";
         StringRequest stringRequest=new StringRequest(StringRequest.Method.GET, url,
 
                 new Response.Listener<String>() {
@@ -159,8 +160,10 @@ public class MainActivity extends AppCompatActivity {
                         RecyclerView recyclerView = findViewById(R.id.recyclerView);
                         recyclerView.setAdapter(listaEmpleadosAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                        String fileName="listaDeEmpleados";
 
+
+
+/**String fileName="listaDeEmpleados";
                         try (FileOutputStream outputStream = MainActivity.this.openFileOutput(fileName,Context.MODE_PRIVATE);
                              FileWriter fileWriter =new FileWriter(outputStream.getFD());){
                             String listaEmpleadosAsJson=gson.toJson(listaEmpleados);
@@ -169,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
+*/
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -200,6 +203,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
     }
 }
