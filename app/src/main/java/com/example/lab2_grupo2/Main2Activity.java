@@ -90,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Gson gson =new Gson();
                         LlaveAPI llaveAPI= gson.fromJson(response,LlaveAPI.class);
-                      apiKey=llaveAPI.getApiKey();
+                     apiKey=llaveAPI.getApiKey();
                         Intent intent = new Intent(Main2Activity.this,MainActivity.class);
                         startActivity(intent);
 

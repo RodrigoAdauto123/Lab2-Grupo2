@@ -18,9 +18,10 @@
         </activity>
 
 
-                <action android:name="android.intent.action.MAIN" />
+
         <activity android:name=".EditarTrabajoActivity"
             android:parentActivityName="MainActivity" >
+
         </activity>
         <activity android:name=".CrearTrabajoActivity"
             android:parentActivityName="MainActivity"/>

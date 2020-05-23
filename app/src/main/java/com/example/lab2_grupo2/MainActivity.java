@@ -135,11 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void obtenerTrabajadores(View view){
 
-
-
-    }
 
 
 
