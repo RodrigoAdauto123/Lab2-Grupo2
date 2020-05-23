@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -15,19 +16,24 @@ import android.util.Log;
 import android.view.View;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.lab2_grupo2.entitades.DtoEmpleado;
 import com.example.lab2_grupo2.entitades.Empleado;
+import com.example.lab2_grupo2.entitades.LlaveAPI;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.lab2_grupo2.entitades.LlaveAPI.apiKey;
+
 public class Main2Activity extends AppCompatActivity {
 
-    static String apiKey;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,19 +82,19 @@ public class Main2Activity extends AppCompatActivity {
     public void obtenerDeInternetApiKEy(View view) {
 
         String url = "http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/getApiKey";
-        StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.POST, url,
 
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        Gson gson = new Gson();
-                        DtoEmpleado dtoEmpleado = gson.fromJson(response, DtoEmpleado.class);
-                        Empleado[] listaEmpleados = dtoEmpleado.getLista();
-                        ListaEmpleadosAdapter listaEmpleadosAdapter = new ListaEmpleadosAdapter(listaEmpleados, Main2Activity.this);
-                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        recyclerView.setAdapter(listaEmpleadosAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(Main2Activity.this));
+                        Gson gson =new Gson();
+                        LlaveAPI llaveAPI= gson.fromJson(response,LlaveAPI.class);
+                      apiKey=llaveAPI.getApiKey();
+                        Intent intent = new Intent(Main2Activity.this,MainActivity.class);
+                        startActivity(intent);
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -98,15 +104,19 @@ public class Main2Activity extends AppCompatActivity {
                     }
                 }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 View view1=findViewById(R.id.ObtenerAPIKEYButton);
                 String groupKey=view1.toString();
-                Map<String, String> cabeceras = new HashMap<>();
-                cabeceras.put("api-key", groupKey);
-                return cabeceras;
+                Map<String, String> params = new HashMap<>();
+                params.put("groupKey", groupKey);
+                return params;
             }
         };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+        };
 
-    } }
+
+    }
 
 

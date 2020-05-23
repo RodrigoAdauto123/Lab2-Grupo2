@@ -17,16 +17,16 @@
         android:id="@+id/editarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="100dp"
         android:text="Editar" />
 
     <Button
         android:id="@+id/borrarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="100dp"
         android:text="Borrar" />
 
     <TextView

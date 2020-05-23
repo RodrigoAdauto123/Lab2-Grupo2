@@ -12,20 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.lab2_grupo2.entitades.Empleado;
+import com.example.lab2_grupo2.entitades.Trabajo;
 
-public class ListaEmpleadosAdapter extends RecyclerView.Adapter<ListaEmpleadosAdapter.EmpleadoViewHolder> {
-Empleado[] listaEmpleados;
+public class ListaTrabajosAdapter extends RecyclerView.Adapter<ListaTrabajosAdapter.TrabajoViewHolder> {
+Trabajo[] listaTrabajos;
 Context contexto;
-public ListaEmpleadosAdapter(Empleado[] lista, Context c){
-    this.listaEmpleados=lista;
+public ListaTrabajosAdapter(Trabajo[] lista, Context c){
+    this.listaTrabajos =lista;
     this.contexto=c;
-
-
 }
-public static class EmpleadoViewHolder extends RecyclerView.ViewHolder{
+public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
     CardView cardView;
     TextView textView10;
-    public EmpleadoViewHolder(  View itemView){
+    public TrabajoViewHolder(View itemView){
         super(itemView);
         cardView=itemView.findViewById(R.id.cardView1);
         textView10=itemView.findViewById(R.id.textView10);
@@ -37,18 +36,18 @@ public static class EmpleadoViewHolder extends RecyclerView.ViewHolder{
 }
     @NonNull
     @Override
-    public EmpleadoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TrabajoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View itemview= LayoutInflater.from(contexto).inflate(R.layout.item_rv,parent,false);
-    EmpleadoViewHolder empleadoViewHolder=new EmpleadoViewHolder(itemview);
+    TrabajoViewHolder trabajoViewHolder =new TrabajoViewHolder(itemview);
 
 
-        return empleadoViewHolder;
+        return trabajoViewHolder;
     }
 
     @Override
-    public void onBindViewHolder( EmpleadoViewHolder holder, int position) {
-    Empleado e =listaEmpleados[position];
-    String text=e.getFirst_name()+"" + e.getLast_name();
+    public void onBindViewHolder(TrabajoViewHolder holder, int position) {
+    Trabajo t = listaTrabajos[position];
+    String text=t.getJobTitle();
     holder.textView10.setText(text);
 
 
@@ -56,6 +55,6 @@ public static class EmpleadoViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public int getItemCount() {
-        return listaEmpleados.length;
+        return listaTrabajos.length;
     }
 }

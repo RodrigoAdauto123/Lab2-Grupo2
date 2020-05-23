@@ -1,7 +1,6 @@
 package com.example.lab2_grupo2;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -9,13 +8,8 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,17 +21,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.example.lab2_grupo2.entitades.DtoEmpleado;
-import com.example.lab2_grupo2.entitades.Empleado;
+import com.example.lab2_grupo2.entitades.DtoTrabajo;
+import com.example.lab2_grupo2.entitades.Trabajo;
 import com.google.gson.Gson;
 
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
 
 
     @Override
@@ -144,53 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void obtenerDeInternet(View view){
-
-        String url="http://ec2-54-165-73-192.compute-1.amazonaws.com:9000";
-        StringRequest stringRequest=new StringRequest(StringRequest.Method.GET, url,
-
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Gson gson=new Gson();
-                        DtoEmpleado dtoEmpleado= gson.fromJson(response,DtoEmpleado.class);
-                        Empleado[] listaEmpleados=dtoEmpleado.getLista();
-                        ListaEmpleadosAdapter listaEmpleadosAdapter=new ListaEmpleadosAdapter(listaEmpleados, MainActivity.this);
-                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        recyclerView.setAdapter(listaEmpleadosAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-
-
-
-/**String fileName="listaDeEmpleados";
-                        try (FileOutputStream outputStream = MainActivity.this.openFileOutput(fileName,Context.MODE_PRIVATE);
-                             FileWriter fileWriter =new FileWriter(outputStream.getFD());){
-                            String listaEmpleadosAsJson=gson.toJson(listaEmpleados);
-                            fileWriter.write(listaEmpleadosAsJson);
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-*/
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }}){
-            @Override
-            public Map<String,String> getHeaders()throws AuthFailureError {
-                Map<String, String> cabeceras =new HashMap<>();
-                cabeceras.put("api-key","EaQibIyUgcoCAyelLnDwUAxR1OX6AH");
-                return cabeceras;
-
-
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+    public void obtenerTrabajadores(View view){
 
 
 
@@ -201,6 +149,54 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        String url="http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/listar/trabajos";
+        StringRequest stringRequest=new StringRequest(StringRequest.Method.GET, url,
+
+                new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+
+                        Gson gson=new Gson();
+                        DtoTrabajo dtoTrabajo= gson.fromJson(response, DtoTrabajo.class);
+                        Trabajo[] lista=dtoTrabajo.getTrabajos();
+                        ListaTrabajosAdapter listaTrabajosAdapter =new ListaTrabajosAdapter(lista, MainActivity.this);
+                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                        recyclerView.setAdapter(listaTrabajosAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+
+
+/**String fileName="listaDeEmpleados";
+ try (FileOutputStream outputStream = MainActivity.this.openFileOutput(fileName,Context.MODE_PRIVATE);
+ FileWriter fileWriter =new FileWriter(outputStream.getFD());){
+ String listaEmpleadosAsJson=gson.toJson(listaEmpleados);
+ fileWriter.write(listaEmpleadosAsJson);
+
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
+ */
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }}){
+            @Override
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                Map<String, String> cabeceras =new HashMap<>();
+                cabeceras.put("api-key","TPyPr3quVcAK8UYSGq6c");
+                return cabeceras;
+
+
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

@@ -1,10 +1,9 @@
 package com.example.lab2_grupo2.entitades;
 
-public class DtoEmpleado {
-
+public class DtoTrabajo {
     private String estado;
-    private Empleado[] lista;
-    private String cuota;
+    private Trabajo[] trabajos;
+private int cuota;
 
 
     public String getEstado() {
@@ -15,19 +14,19 @@ public class DtoEmpleado {
         this.estado = estado;
     }
 
-    public Empleado[] getLista() {
-        return lista;
+    public Trabajo[] getTrabajos() {
+        return trabajos;
     }
 
-    public void setLista(Empleado[] lista) {
-        this.lista = lista;
+    public void setTrabajos(Trabajo[] trabajos) {
+        this.trabajos = trabajos;
     }
 
-    public String getCuota() {
+    public int getCuota() {
         return cuota;
     }
 
-    public void setCuota(String cuota) {
+    public void setCuota(int cuota) {
         this.cuota = cuota;
     }
 }
