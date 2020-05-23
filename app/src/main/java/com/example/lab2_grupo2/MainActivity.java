@@ -1,6 +1,8 @@
 package com.example.lab2_grupo2;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.lab2_grupo2.entidades.Trabajo;
 import com.example.lab2_grupo2.entitades.DtoTrabajo;
 import com.example.lab2_grupo2.entitades.TrabajoListar;
 import com.google.gson.Gson;
@@ -29,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    String api_key;
 
 
     @Override
@@ -194,4 +200,101 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+
+
+
+    public void vistaEditarTrabajo(View view, int i){
+
+        Trabajo[] trabajo = null;
+        String[] createBy = null;
+        if(createBy[i] != null){
+            Intent intent = new Intent(this,EditarTrabajoActivity.class);
+            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
+            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
+            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
+            intent.putExtra("JobId",trabajo[i].getJob_id());
+            intent.putExtra("api-key",api_key);
+            startActivity(intent);
+
+        }else {
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Acceso Degenado");
+            alertDialog.setMessage("No se puede editar este trabajo porque no fue creado por usted");
+            alertDialog.setPositiveButton("De Acuerto", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertDialog.show();
+        }
+    }
+
+
+
+    public void borrarTrabajo(View view, final int i){
+
+
+
+        final Trabajo[] trabajo = null;
+        String[] createBy = null;
+
+        if(createBy[i] != null){
+
+            String url = "http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/borrar/trabajo";
+            StringRequest stringRequest = new StringRequest(StringRequest.Method.DELETE, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> cabeceras  = new HashMap<>();
+                    cabeceras.put("api-key",api_key);
+                    return cabeceras;
+                }
+
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parametros = new HashMap<>();
+                    parametros.put("id",trabajo[i].getJob_id());
+                    return parametros;
+                }
+            };
+
+            Intent intent = new Intent(this,EditarTrabajoActivity.class);
+            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
+            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
+            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
+            intent.putExtra("JobId",trabajo[i].getJob_id());
+            intent.putExtra("api-key",api_key);
+            startActivity(intent);
+
+        }else {
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Acceso Degenado");
+            alertDialog.setMessage("No se puede borrar este trabajo porque no fue creado por usted");
+            alertDialog.setPositiveButton("De Acuerto", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertDialog.show();
+        }
+
+
+
+
+    }
+
 }
