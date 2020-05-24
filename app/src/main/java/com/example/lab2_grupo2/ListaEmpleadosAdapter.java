@@ -97,7 +97,7 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
     @Override
     public void onBindViewHolder(TrabajoViewHolder holder, int position) {
     Empleado e = listaEmpleados[position];
-    String text=e.getFirstName() +""+e.getLastName();
+    String text=e.getFirstName() +" "+e.getLastName();
     holder.textView10.setText(text);
      mPosition=position;
 

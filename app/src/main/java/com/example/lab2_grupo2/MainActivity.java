@@ -326,7 +326,8 @@ startActivity(intent);
                 return true;
 
             case R.id.addWork :
-
+                Intent intent2 =new Intent( this,CrearTrabajoActivity.class);
+                startActivity(intent2);
                 return true;
 
 

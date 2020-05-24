@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.lab2_grupo2.entidades.ApiKey;
 import com.example.lab2_grupo2.entitades.DtoEmpleado;
 import com.example.lab2_grupo2.entitades.Empleado;
 import com.example.lab2_grupo2.entitades.LlaveAPI;
@@ -89,7 +90,7 @@ public class Main2Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Gson gson =new Gson();
-                        LlaveAPI llaveAPI= gson.fromJson(response,LlaveAPI.class);
+                        ApiKey llaveAPI= gson.fromJson(response,ApiKey.class);
                      apiKey=llaveAPI.getApiKey();
                         Intent intent = new Intent(Main2Activity.this,MainActivity.class);
                         startActivity(intent);
