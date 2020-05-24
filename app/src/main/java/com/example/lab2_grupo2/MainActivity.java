@@ -213,7 +213,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void vistaEditarTrabajo(View view){
+    public void vistaEditarTrabajo(View view, String jobID){
+
+        int i= 0;
+        for (int z = 0; z<lista.length;z++){
+            if(lista[z].getJobId() == jobID ){
+                i = z;
+            }
+        }
 
         if(lista[i].getCreateBy() != null){
             Intent intent = new Intent(this,EditarTrabajoActivity.class);
@@ -241,7 +248,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void borrarTrabajo(View view){
+    public void borrarTrabajo(View view, String jobID){
+
+        int i = 0;
+        for (int z = 0; z<lista.length;z++){
+            if(lista[z].getJobId() == jobID ){
+                i = z;
+            }
+        }
 
         id = lista[i].getJobId();
 
