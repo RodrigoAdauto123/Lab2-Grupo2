@@ -9,8 +9,10 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +26,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import com.example.lab2_grupo2.entidades.Trabajo;
 import com.example.lab2_grupo2.entitades.DtoTrabajo;
-import com.example.lab2_grupo2.entitades.TrabajoListar;
+import com.example.lab2_grupo2.entitades.Trabajo;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -159,11 +160,16 @@ public class MainActivity extends AppCompatActivity {
 
                         Gson gson=new Gson();
                         DtoTrabajo dtoTrabajo= gson.fromJson(response, DtoTrabajo.class);
-                        TrabajoListar[] lista=dtoTrabajo.getTrabajoListars();
+
+                        Trabajo[] lista=dtoTrabajo.getTrabajos();
+
                         ListaTrabajosAdapter listaTrabajosAdapter =new ListaTrabajosAdapter(lista, MainActivity.this);
+
                         RecyclerView recyclerView = findViewById(R.id.recyclerView);
                         recyclerView.setAdapter(listaTrabajosAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+
 
 
 
@@ -181,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("mensa","ERRoVOL");
 
             }}){
             @Override
@@ -206,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void vistaEditarTrabajo(View view, int i){
 
-        Trabajo[] trabajo = null;
+        com.example.lab2_grupo2.entidades.Trabajo[] trabajo = null;
         String[] createBy = null;
         if(createBy[i] != null){
             Intent intent = new Intent(this,EditarTrabajoActivity.class);
@@ -238,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final Trabajo[] trabajo = null;
+        final com.example.lab2_grupo2.entidades.Trabajo[] trabajo = null;
         String[] createBy = null;
 
         if(createBy[i] != null){

@@ -2,7 +2,7 @@ package com.example.lab2_grupo2.entitades;
 
 import java.io.Serializable;
 
-public class TrabajoListar implements Serializable {
+public class Trabajo implements Serializable {
 
 
 

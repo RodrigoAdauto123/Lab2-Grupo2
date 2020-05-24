@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class EditarTrabajoActivity extends AppCompatActivity {
         int SalarioMaximo = intent.getIntExtra("SalarioMaximo",0);
         int SalarioMinimo = intent.getIntExtra("SalarioMinimo",0);
         String id = intent.getStringExtra("JobId");
-
+        Log.e("mensa",id);
         textView.setText(nombre);
         textView2.setText(String.valueOf(SalarioMaximo));
         textView3.setText(String.valueOf(SalarioMinimo));
