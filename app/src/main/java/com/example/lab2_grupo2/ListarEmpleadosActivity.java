@@ -26,24 +26,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import com.example.lab2_grupo2.entitades.DtoTrabajo;
+import com.example.lab2_grupo2.entitades.DtoEmpleado;
+import com.example.lab2_grupo2.entitades.Empleado;
 import com.example.lab2_grupo2.entitades.Trabajo;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class ListarEmpleadosActivity extends AppCompatActivity {
 
     String api_key;
-    Trabajo[] lista;
-    String id;
-    int i;
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.appbar, menu);
+        getMenuInflater().inflate(R.menu.appbar_empleados, menu);
 
         return true;
     }
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                                          case R.id.eliminarElemento:
                                                              AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
                                                              dialog.setMessage("Estás seguro que deseas eliminar todos los elementos");
-                                                             dialog.setPositiveButton("Eliminar todo", new DialogInterface.OnClickListener() {
+                                                             dialog.setPositiveButton("Eliminartodo", new DialogInterface.OnClickListener() {
                                                                  @Override
                                                                  public void onClick(DialogInterface dialogInterface, int i) {
                                                                      Toast.makeText(MainActivity.this,"Eliminar",Toast.LENGTH_SHORT).show();
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        String url="http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/listar/trabajos";
+        String url="http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/listar/empleados";
         StringRequest stringRequest=new StringRequest(StringRequest.Method.GET, url,
 
                 new Response.Listener<String>() {
@@ -161,15 +160,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         Gson gson=new Gson();
-                        DtoTrabajo dtoTrabajo= gson.fromJson(response, DtoTrabajo.class);
+                        DtoEmpleado dtoEmpleado= gson.fromJson(response, DtoEmpleado.class);
 
-                        lista=dtoTrabajo.getTrabajos();
+                        Empleado[] lista=dtoEmpleado.getEmpleados();
 
-                        ListaTrabajosAdapter listaTrabajosAdapter =new ListaTrabajosAdapter(lista, MainActivity.this);
+                        ListaEmpleadosAdapter listaEmpleadosAdapter =new ListaEmpleadosAdapter(lista, ListarEmpleadosActivity.this);
 
-                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        recyclerView.setAdapter(listaTrabajosAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        RecyclerView recyclerView = findViewById(R.id.recyclerView2);
+                        recyclerView.setAdapter(listaEmpleadosAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(ListarEmpleadosActivity.this));
 
 
 
@@ -207,27 +206,39 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_listar_empleados);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.listWork :
+                Intent intent =new Intent( this,MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.addEmpleado :
+return true;
+
+
+
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
 
 
 
-    public void vistaEditarTrabajo(View view, String jobID){
+    public void vistaEditarTrabajo(View view, int i){
 
-        int i= 0;
-        for (int z = 0; z<lista.length;z++){
-            if(lista[z].getJobId() == jobID ){
-                i = z;
-            }
-        }
-
-        if(lista[i].getCreateBy() != null){
+        com.example.lab2_grupo2.entidades.Trabajo[] trabajo = null;
+        String[] createBy = null;
+        if(createBy[i] != null){
             Intent intent = new Intent(this,EditarTrabajoActivity.class);
-            intent.putExtra("NombreTrabajo",lista[i].getJobTitle());
-            intent.putExtra("SalarioMaximo",lista[i].getMaxSalary());
-            intent.putExtra("SalarioMinimo",lista[i].getMinSalary());
-            intent.putExtra("JobId",lista[i].getJobId());
+            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
+            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
+            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
+            intent.putExtra("JobId",trabajo[i].getJob_id());
             intent.putExtra("api-key",api_key);
             startActivity(intent);
 
@@ -248,18 +259,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void borrarTrabajo(View view, String jobID){
+    public void borrarTrabajo(View view, final int i){
 
-        int i = 0;
-        for (int z = 0; z<lista.length;z++){
-            if(lista[z].getJobId() == jobID ){
-                i = z;
-            }
-        }
 
-        id = lista[i].getJobId();
 
-        if(lista[i].getCreateBy() != null){
+        final com.example.lab2_grupo2.entidades.Trabajo[] trabajo = null;
+        String[] createBy = null;
+
+        if(createBy[i] != null){
 
             String url = "http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/borrar/trabajo";
             StringRequest stringRequest = new StringRequest(StringRequest.Method.DELETE, url, new Response.Listener<String>() {
@@ -283,16 +290,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<>();
-                    parametros.put("id",id);
+                    parametros.put("id",trabajo[i].getJob_id());
                     return parametros;
                 }
             };
 
             Intent intent = new Intent(this,EditarTrabajoActivity.class);
-            intent.putExtra("NombreTrabajo",lista[i].getJobTitle());
-            intent.putExtra("SalarioMaximo",lista[i].getMaxSalary());
-            intent.putExtra("SalarioMinimo",lista[i].getMinSalary());
-            intent.putExtra("JobId",lista[i].getJobId());
+            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
+            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
+            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
+            intent.putExtra("JobId",trabajo[i].getJob_id());
             intent.putExtra("api-key",api_key);
             startActivity(intent);
 
@@ -315,29 +322,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.listEmployee :
-                Intent intent =new Intent( this,ListarEmpleadosActivity.class);
-startActivity(intent);
-                return true;
-
-            case R.id.addWork :
-                Intent intent2 =new Intent( this,CrearTrabajoActivity.class);
-                startActivity(intent2);
-                return true;
-
-
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
 }
-
-
-
-
-

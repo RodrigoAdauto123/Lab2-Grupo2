@@ -2,7 +2,9 @@ package com.example.lab2_grupo2.entidades;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ApiKey {
+import java.io.Serializable;
+
+public class ApiKey implements Serializable{
 
     private String estado;
     private int cuota;

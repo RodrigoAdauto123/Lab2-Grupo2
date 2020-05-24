@@ -37,6 +37,7 @@ public class CrearTrabajoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_trabajo);
 
@@ -49,6 +50,41 @@ public class CrearTrabajoActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 ApiKey apikey = gson.fromJson(response,ApiKey.class);
                 api_key = apikey.getApiKey();
+
+
+                String url2 = "http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/listar/departamentos";
+                StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, url2, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        DepartamentoDTO dDTO = gson.fromJson(response,DepartamentoDTO.class);
+                        //LIsta de departamentos
+                        lista = dDTO.getLista();
+                        for (int i=0;i<lista.length;i++){
+                            listaNombresDepart[i] = lista[i].getDepartmentName();
+                            listaShortName[i] = lista[i].getDepartmentShortName();
+                        }
+
+                        Spinner spinner = (Spinner) findViewById(R.id.spinnerDepartamento);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CrearTrabajoActivity.this,android.R.layout.simple_spinner_dropdown_item,
+                                listaNombresDepart);
+                        spinner.setAdapter(adapter);
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("errorConsulta","Ocurrio un error");
+                    }
+                }){
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> cabeceras = new HashMap<>();
+                        cabeceras.put("api-key",api_key);
+                        return cabeceras;
+                    }
+                };
+
 
 
             }
@@ -68,43 +104,6 @@ public class CrearTrabajoActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
 
-
-
-
-        String url2 = "http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/listar/departamentos";
-        StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, url2, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Gson gson = new Gson();
-                DepartamentoDTO dDTO = gson.fromJson(response,DepartamentoDTO.class);
-                //LIsta de departamentos
-                lista = dDTO.getLista();
-                for (int i=0;i<lista.length;i++){
-                    listaNombresDepart[i] = lista[i].getDepartmentName();
-                    listaShortName[i] = lista[i].getDepartmentShortName();
-                }
-
-                Spinner spinner = (Spinner) findViewById(R.id.spinnerDepartamento);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(CrearTrabajoActivity.this,android.R.layout.simple_spinner_dropdown_item,
-                        listaNombresDepart);
-                spinner.setAdapter(adapter);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("errorConsulta","Ocurrio un error");
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> cabeceras = new HashMap<>();
-                cabeceras.put("api-key",api_key);
-                return cabeceras;
-            }
-        };
-        RequestQueue queue2 = Volley.newRequestQueue(this);
-        queue2.add(stringRequest2);
     }
 
     public void Crear(View view){
@@ -147,7 +146,20 @@ public class CrearTrabajoActivity extends AppCompatActivity {
                 cabeceras.put("api-key",api_key);
                 return cabeceras;
             }
+/**
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
 
+                Map<String, String> params = new HashMap<>();
+                params.put("job_id",job_id);
+                params.put("jobTitle",nombreTrabajo);
+                params.put("minSalary",SalMinTrabajo);
+                params.put("maxSalary",SalMaxTrabajo);
+                params.put("update","true");
+                return params;
+
+            }
+*/
             @Override
             public String getBodyContentType() {
 
@@ -159,6 +171,9 @@ public class CrearTrabajoActivity extends AppCompatActivity {
                 trabajo.setMinSalary(Integer.valueOf(SalMinTrabajo));
                 String json = gson.toJson(trabajo);
                 return json;
+
+            //    return "application/x-www-form-urlencoded; charset=UTF-8";
+
             }
         };
 

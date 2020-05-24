@@ -1,21 +1,23 @@
-package com.example.lab2_grupo2.entidades;
+package com.example.lab2_grupo2.entitades;
 
 import java.io.Serializable;
 
 public class Trabajo implements Serializable {
 
-    private String job_id;
+
+
+    private String jobId;
     private String jobTitle;
     private int minSalary;
     private int maxSalary;
-    private String update;
+    private String createBy= null;
 
-    public String getJob_id() {
-        return job_id;
+    public String getJobId() {
+        return jobId;
     }
 
-    public void setJob_id(String job_id) {
-        this.job_id = job_id;
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 
     public String getJobTitle() {
@@ -42,11 +44,11 @@ public class Trabajo implements Serializable {
         this.maxSalary = maxSalary;
     }
 
-    public String getUpdate() {
-        return update;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public void setUpdate(String update) {
-        this.update = update;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }

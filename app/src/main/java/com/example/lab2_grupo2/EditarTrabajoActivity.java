@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -104,31 +105,8 @@ public class EditarTrabajoActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    public void vistaEditarTrabajo(View view, int i){
 
-        Trabajo[] trabajo = null;
-        String[] createBy = null;
-        if(createBy[i] != null){
-            Intent intent = new Intent(this,EditarTrabajoActivity.class);
-            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
-            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
-            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
-            intent.putExtra("JobId",trabajo[i].getJob_id());
-            intent.putExtra("api-key",api_key);
-            startActivity(intent);
 
-        }else {
 
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle("Acceso Degenado");
-            alertDialog.setMessage("No se puede editar este trabajo porque no fue creado por usted");
-            alertDialog.setPositiveButton("De Acuerto", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
-            alertDialog.show();
-        }
-    }
 }
