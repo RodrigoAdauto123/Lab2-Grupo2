@@ -1,16 +1,16 @@
 package com.example.lab2_grupo2.entitades;
-
 public class Empleado {
 
-    private int employee_id;
+    private String employee_id;
     private String first_name;
     private String last_name;
+    private String createBy= null;
 
-    public int getEmployee_id() {
+    public String getEmployee_id() {
         return employee_id;
     }
 
-    public void setEmployee_id(int employee_id) {
+    public void setEmployee_id(String employee_id) {
         this.employee_id = employee_id;
     }
 
@@ -28,5 +28,13 @@ public class Empleado {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }
