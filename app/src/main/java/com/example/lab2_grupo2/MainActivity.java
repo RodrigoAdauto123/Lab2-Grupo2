@@ -36,8 +36,9 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     String api_key;
-
-
+    Trabajo[] lista;
+    String id;
+    int i;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         Gson gson=new Gson();
                         DtoTrabajo dtoTrabajo= gson.fromJson(response, DtoTrabajo.class);
 
-                        Trabajo[] lista=dtoTrabajo.getTrabajos();
+                        lista=dtoTrabajo.getTrabajos();
 
                         ListaTrabajosAdapter listaTrabajosAdapter =new ListaTrabajosAdapter(lista, MainActivity.this);
 
@@ -211,16 +212,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void vistaEditarTrabajo(View view, int i){
+    public void vistaEditarTrabajo(View view){
 
-        com.example.lab2_grupo2.entidades.Trabajo[] trabajo = null;
-        String[] createBy = null;
-        if(createBy[i] != null){
+        if(lista[i].getCreateBy() != null){
             Intent intent = new Intent(this,EditarTrabajoActivity.class);
-            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
-            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
-            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
-            intent.putExtra("JobId",trabajo[i].getJob_id());
+            intent.putExtra("NombreTrabajo",lista[i].getJobTitle());
+            intent.putExtra("SalarioMaximo",lista[i].getMaxSalary());
+            intent.putExtra("SalarioMinimo",lista[i].getMinSalary());
+            intent.putExtra("JobId",lista[i].getJobId());
             intent.putExtra("api-key",api_key);
             startActivity(intent);
 
@@ -241,14 +240,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void borrarTrabajo(View view, final int i){
+    public void borrarTrabajo(View view){
 
+        id = lista[i].getJobId();
 
-
-        final com.example.lab2_grupo2.entidades.Trabajo[] trabajo = null;
-        String[] createBy = null;
-
-        if(createBy[i] != null){
+        if(lista[i].getCreateBy() != null){
 
             String url = "http://ec2-54-165-73-192.compute-1.amazonaws.com:9000/borrar/trabajo";
             StringRequest stringRequest = new StringRequest(StringRequest.Method.DELETE, url, new Response.Listener<String>() {
@@ -272,16 +268,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parametros = new HashMap<>();
-                    parametros.put("id",trabajo[i].getJob_id());
+                    parametros.put("id",id);
                     return parametros;
                 }
             };
 
             Intent intent = new Intent(this,EditarTrabajoActivity.class);
-            intent.putExtra("NombreTrabajo",trabajo[i].getJobTitle());
-            intent.putExtra("SalarioMaximo",trabajo[i].getMaxSalary());
-            intent.putExtra("SalarioMinimo",trabajo[i].getMinSalary());
-            intent.putExtra("JobId",trabajo[i].getJob_id());
+            intent.putExtra("NombreTrabajo",lista[i].getJobTitle());
+            intent.putExtra("SalarioMaximo",lista[i].getMaxSalary());
+            intent.putExtra("SalarioMinimo",lista[i].getMinSalary());
+            intent.putExtra("JobId",lista[i].getJobId());
             intent.putExtra("api-key",api_key);
             startActivity(intent);
 
