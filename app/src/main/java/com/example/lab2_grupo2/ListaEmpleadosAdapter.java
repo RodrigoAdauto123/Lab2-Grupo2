@@ -14,16 +14,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.example.lab2_grupo2.entitades.Trabajo;
 import com.example.lab2_grupo2.entitades.CustomOnClickListener;
+import com.example.lab2_grupo2.entitades.Empleado;
+import com.example.lab2_grupo2.entitades.Trabajo;
 
-public class ListaTrabajosAdapter extends RecyclerView.Adapter<ListaTrabajosAdapter.TrabajoViewHolder>  {
-static Trabajo[] listaTrabajoListars;
+public class ListaEmpleadosAdapter extends RecyclerView.Adapter<ListaEmpleadosAdapter.TrabajoViewHolder>  {
+static Empleado[] listaEmpleados;
 static Context contexto;
 static int mPosition;
-public ListaTrabajosAdapter(Trabajo[] lista, Context c){
-    this.listaTrabajoListars =lista;
+public ListaEmpleadosAdapter(Empleado[] lista, Context c){
+    this.listaEmpleados =lista;
     this.contexto=c;
 }
 public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
@@ -38,7 +38,7 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
         borrarButton= itemView.findViewById(R.id.borrarButton);
 
         editarButton=itemView.findViewById(R.id.editarButton);
-        editarButton.setOnClickListener(new CustomOnClickListener( mPosition,listaTrabajoListars){
+  /**      editarButton.setOnClickListener(new CustomOnClickListener( mPosition, listaEmpleados){
                                             @Override
                                             public void onClick(View view) {
 
@@ -46,13 +46,13 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
 
 
 
-                                                if(listaTrabajoListars[mPosition].getCreateBy() != null){
+                                                if(listaEmpleados[mPosition].getCreateBy() != null){
                                                     Intent intent = new Intent(view.getContext(),EditarTrabajoActivity.class);
-                                                    intent.putExtra("NombreTrabajo",listaTrabajoListars[mPosition].getJobTitle());
-                                                    intent.putExtra("SalarioMaximo",listaTrabajoListars[mPosition].getMaxSalary());
-                                                    intent.putExtra("SalarioMinimo",listaTrabajoListars[mPosition].getMinSalary());
+                                                    intent.putExtra("NombreTrabajo", listaEmpleados[mPosition].getJobTitle());
+                                                    intent.putExtra("SalarioMaximo", listaEmpleados[mPosition].getMaxSalary());
+                                                    intent.putExtra("SalarioMinimo", listaEmpleados[mPosition].getMinSalary());
 
-                                                    intent.putExtra("JobId",listaTrabajoListars[mPosition].getJobId());
+                                                    intent.putExtra("JobId", listaEmpleados[mPosition].getJobId());
                                                     intent.putExtra("api-key","TPyPr3quVcAK8UYSGq6c");
                                                     contexto.startActivity(intent);
 
@@ -77,7 +77,7 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
                                         }
 
 
-        );
+        );*/
 
     }
 
@@ -96,8 +96,8 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public void onBindViewHolder(TrabajoViewHolder holder, int position) {
-    Trabajo t = listaTrabajoListars[position];
-    String text=t.getJobTitle();
+    Empleado e = listaEmpleados[position];
+    String text=e.getFirstName() +""+e.getLastName();
     holder.textView10.setText(text);
      mPosition=position;
 
@@ -107,6 +107,6 @@ public static class TrabajoViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public int getItemCount() {
-        return listaTrabajoListars.length;
+        return listaEmpleados.length;
     }
 }

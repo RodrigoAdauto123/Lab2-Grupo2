@@ -6,10 +6,10 @@ public class CustomOnClickListener implements View.OnClickListener
 {
 
     int position;
-    Trabajo[] lista;
+    Trabajo[] listaTrabajoListars;
     public CustomOnClickListener(int position, Trabajo[] lista ) {
         this.position = position;
-        this.lista=lista;
+        this.listaTrabajoListars =lista;
     }
 
     @Override

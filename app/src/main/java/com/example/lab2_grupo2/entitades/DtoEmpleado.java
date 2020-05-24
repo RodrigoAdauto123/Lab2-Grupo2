@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class DtoEmpleado implements Serializable {
 
     private String estado;
-    private Empleado[] lista;
+    private Empleado[] empleados;
     private String cuota;
 
 
@@ -17,12 +17,12 @@ public class DtoEmpleado implements Serializable {
         this.estado = estado;
     }
 
-    public Empleado[] getLista() {
-        return lista;
+    public Empleado[] getEmpleados() {
+        return empleados;
     }
 
-    public void setLista(Empleado[] lista) {
-        this.lista = lista;
+    public void setEmpleados(Empleado[] empleados) {
+        this.empleados = empleados;
     }
 
     public String getCuota() {

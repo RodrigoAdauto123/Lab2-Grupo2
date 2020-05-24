@@ -42,7 +42,7 @@ public class EditarTrabajoActivity extends AppCompatActivity {
         int SalarioMaximo = intent.getIntExtra("SalarioMaximo",0);
         int SalarioMinimo = intent.getIntExtra("SalarioMinimo",0);
         String id = intent.getStringExtra("JobId");
-        Log.e("mensa",id);
+
         textView.setText(nombre);
         textView2.setText(String.valueOf(SalarioMaximo));
         textView3.setText(String.valueOf(SalarioMinimo));
