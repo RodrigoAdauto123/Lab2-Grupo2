@@ -9,37 +9,37 @@
     <EditText
         android:id="@+id/editNombreTrabajo3"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.179" />
 
     <EditText
         android:id="@+id/editSalMinTrabajo3"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginTop="60dp"
-        android:layout_marginBottom="600dp"
+        android:layout_marginBottom="576dp"
         android:text="Nombre"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -54,20 +54,20 @@
         android:id="@+id/textView14"
         android:layout_width="0dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="550dp"
+        android:layout_marginBottom="512dp"
         android:text="Salario minimo"
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editSalMinTrabajo3"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="0dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="500dp"
+        android:layout_marginBottom="448dp"
         android:text="Salario maximo"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -108,16 +108,16 @@
     <EditText
         android:id="@+id/editSalMaxTrabajo3"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
+        app:layout_constraintVertical_bias="0.361" />
 
     <Button
         android:id="@+id/buttonCrear3"
@@ -135,7 +135,7 @@
     <TextView
         android:id="@+id/textViewId"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Id Invisible"
         android:textAlignment="center"
         android:visibility="invisible"
